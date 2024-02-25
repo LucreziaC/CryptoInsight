@@ -1,6 +1,6 @@
 package com.lucreziacarena.cryptoinsight.feature.home.data
 
-import com.lucreziacarena.cryptoinsight.feature.home.data.response.CryptoList
+import com.lucreziacarena.cryptoinsight.feature.home.data.model.domain.CryptoList
 import retrofit2.Response
 import javax.inject.Inject
 

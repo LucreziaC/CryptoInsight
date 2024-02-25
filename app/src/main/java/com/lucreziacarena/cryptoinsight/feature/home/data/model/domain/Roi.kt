@@ -1,4 +1,4 @@
-package com.lucreziacarena.cryptoinsight.feature.home.data.response
+package com.lucreziacarena.cryptoinsight.feature.home.data.model.domain
 
 data class Roi(
     val currency: String,
