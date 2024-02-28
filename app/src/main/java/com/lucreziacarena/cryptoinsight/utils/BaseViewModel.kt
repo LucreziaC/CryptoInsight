@@ -1,12 +1,8 @@
 package com.lucreziacarena.cryptoinsight.utils
 
+import ApiResult
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.waseem.libroom.core.mvi.MviAction
-import com.waseem.libroom.core.mvi.MviEvent
-import com.waseem.libroom.core.mvi.MviResult
-import com.waseem.libroom.core.mvi.MviStateReducer
-import com.waseem.libroom.core.mvi.MviViewState
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,7 +20,7 @@ abstract class BaseViewModel<Action : MviAction, Result : MviResult, Event : Mvi
     reducer: Reducer
 ) : ViewModel(), MviStateReducer<State, Result> by reducer {
 
-    private val _fsmFlow = MutableSharedFlow<Action>(
+    private val _action = MutableSharedFlow<Action>(
         extraBufferCapacity = 20,
         onBufferOverflow = BufferOverflow.DROP_OLDEST // gotta use this in order to be able to use tryEmit function
     )
@@ -44,7 +40,7 @@ abstract class BaseViewModel<Action : MviAction, Result : MviResult, Event : Mvi
 
     @Suppress("UNCHECKED_CAST")
     private fun setupStateMachine() {
-        _fsmFlow.onEach {  }
+        _action.onEach {  }
             .flatMapConcat { it.process() } //each action is transformed into a result
             .scan(_state.value) { previousState, result ->
                 if (result is MviEvent) {
@@ -69,6 +65,6 @@ abstract class BaseViewModel<Action : MviAction, Result : MviResult, Event : Mvi
     protected fun emitEvent(event: Event) = flow { emit(event) }
 
     fun action(action: Action) {
-        _fsmFlow.tryEmit(action)
+        _action.tryEmit(action)
     }
 }

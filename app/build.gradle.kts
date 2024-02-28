@@ -52,6 +52,10 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
@@ -59,11 +63,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
     implementation("com.google.accompanist:accompanist-insets:0.10.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
-    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     // compose
     implementation( "androidx.compose.ui:ui:${rootProject.extra["composeVersion"]}")
@@ -90,6 +94,8 @@ dependencies {
     // dependency injection
     implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVersion"]}")
     kapt( "com.google.dagger:hilt-compiler:${rootProject.extra["hiltVersion"]}")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
     kapt( "androidx.hilt:hilt-compiler:1.2.0")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
 }

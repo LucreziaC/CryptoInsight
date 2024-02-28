@@ -1,21 +1,32 @@
 package com.lucreziacarena.cryptoinsight.di
 
+import com.lucreziacarena.cryptoinsight.feature.home.viewmodel.HomeViewModel
+import com.lucreziacarena.cryptoinsight.network.CryptoApi
+import com.lucreziacarena.cryptoinsight.network.CryptoRepo
+import com.lucreziacarena.cryptoinsight.network.CryptoRepoInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
-    /*@Singleton
+    @Singleton
     @Provides
-    fun provideMovieRepository(
-        moviesApi: MovieApi,
-        trailersApi: TrailerApi
-    ): IMovieRepo {
-        return MovieRepo(movieDao, moviesApi, trailersApi)
-    }*/
+    fun provideCryptoRepository(
+        moviesApi: CryptoApi,
+    ): CryptoRepoInterface {
+        return CryptoRepo(moviesApi)
+    }
+
+    @Provides
+    fun provideDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+
+
 }

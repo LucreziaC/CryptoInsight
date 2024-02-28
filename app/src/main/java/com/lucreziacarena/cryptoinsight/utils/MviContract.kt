@@ -1,4 +1,6 @@
-package com.waseem.libroom.core.mvi
+package com.lucreziacarena.cryptoinsight.utils
+
+import ApiResult
 
 
 /**

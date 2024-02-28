@@ -1,5 +1,10 @@
 package com.lucreziacarena.cryptoinsight.di
 
+import com.lucreziacarena.cryptoinsight.BuildConfig
+import com.lucreziacarena.cryptoinsight.feature.home.viewmodel.HomeViewModel
+import com.lucreziacarena.cryptoinsight.network.CryptoApi
+import com.lucreziacarena.cryptoinsight.utils.BaseViewModel
+import com.lucreziacarena.cryptoinsight.utils.MviAction
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,7 +14,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import com.lucreziacarena.cryptoinsight.BuildConfig
 
 
 @Module
@@ -22,13 +26,17 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
-        val loggingInterceptor = HttpLoggingInterceptor().also { it.setLevel(HttpLoggingInterceptor.Level.BODY) }
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .build()
-    } else OkHttpClient
-        .Builder()
-        .build()
+    } else {
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        OkHttpClient
+            .Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
 
 
     @Provides
@@ -42,6 +50,13 @@ class NetworkModule {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .build()
+
+
+    @Provides
+    @Singleton
+    fun provideCryptoService(retrofit: Retrofit): CryptoApi = retrofit.create(CryptoApi::class.java)
+
+
 }
 
 
