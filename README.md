@@ -20,7 +20,7 @@ CryptoInsight è un'applicazione scritta in Kotlin che consente agli utenti di v
 
 ## Requisiti di Sistema
 
-- Dispositivo Android con versione Android 5.0 (API livello 21) o successiva.
+- Dispositivo Android con versione Android 8.0 (API livello 26) o successiva.
 
 ## Installazione
 
