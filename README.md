@@ -34,7 +34,7 @@ git clone https://github.com/tuonome/cryptoInsight.git
 
 3. Esegui il progetto sull'emulatore o dispositivo Android.
 
-## Come Usare
+## Come utilizzare l'app
 
 1. Una volta avviata l'applicazione, verrà visualizzata la lista delle dieci cryptovalute più quotate.
 
