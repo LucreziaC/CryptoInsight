@@ -1,6 +1,5 @@
 package com.lucreziacarena.cryptoinsight.di
 
-import com.lucreziacarena.cryptoinsight.feature.home.viewmodel.HomeViewModel
 import com.lucreziacarena.cryptoinsight.network.CryptoApi
 import com.lucreziacarena.cryptoinsight.network.CryptoRepo
 import com.lucreziacarena.cryptoinsight.network.CryptoRepoInterface

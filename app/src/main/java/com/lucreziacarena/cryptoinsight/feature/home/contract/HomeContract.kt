@@ -7,7 +7,7 @@ import javax.inject.Inject
 sealed class HomeAction : MviAction {
     object Load : HomeAction()
     object ViewAllClicked : HomeAction()
-    data class BookItemClicked(val bookId: String) : HomeAction()
+    data class OnCryptoClick(val cryptoId: String) : HomeAction()
 }
 
 sealed class HomeResult : MviResult {
@@ -17,8 +17,7 @@ sealed class HomeResult : MviResult {
 }
 
 sealed class HomeEvent : MviEvent, HomeResult() {
-    object NavigateToBooksList : HomeEvent()
-    data class NavigateToBookDetail(val bookId: String): HomeEvent()
+    data class NavigateToDetail(val cryptoId: String) : HomeEvent()
 }
 
 sealed class HomeState : MviViewState {

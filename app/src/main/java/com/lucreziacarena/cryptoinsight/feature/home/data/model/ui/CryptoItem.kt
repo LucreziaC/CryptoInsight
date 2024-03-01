@@ -31,7 +31,7 @@ data class CryptoItemUI(
     val name: String?,
     val price_change_24h: Double?,
     val price_change_percentage_24h: Double?,
-    val roi: Roi?,
+    val roi: RoiUi?,
     val symbol: String?,
     val total_supply: Double?,
     val total_volume: Long?
@@ -60,7 +60,7 @@ fun CryptoListItem.toUiModel(): CryptoItemUI = CryptoItemUI(
     name,
     price_change_24h,
     price_change_percentage_24h,
-    roi,
+    roi?.toUiModel(),
     symbol,
     total_supply,
     total_volume

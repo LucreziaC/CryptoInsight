@@ -1,10 +1,7 @@
 package com.lucreziacarena.cryptoinsight.di
 
 import com.lucreziacarena.cryptoinsight.BuildConfig
-import com.lucreziacarena.cryptoinsight.feature.home.viewmodel.HomeViewModel
 import com.lucreziacarena.cryptoinsight.network.CryptoApi
-import com.lucreziacarena.cryptoinsight.utils.BaseViewModel
-import com.lucreziacarena.cryptoinsight.utils.MviAction
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -7,7 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.showtimecompose.navigation.NavigationItem
+import com.lucreziacarena.cryptoinsight.feature.detail.composable.DetailScreen
 import com.lucreziacarena.cryptoinsight.feature.home.composable.Home
 
 @Composable
@@ -22,8 +22,7 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(NavigationItem.Home.route) {
-            Home()
-            //ShowListScreen(navController=navController)
+            Home(navController=navController)
         }
         composable(
             route = "${NavigationItem.Detail.route}?id={showId}",
@@ -34,7 +33,7 @@ fun AppNavHost(
                 },
             )
         ) { backStackEntry ->
-           // backStackEntry.arguments?.getString("showId")?.let { ShowDetailScreen(it) }
+            backStackEntry.arguments?.getString("showId")?.let { DetailScreen(cryptoId = it, navController = navController) }
         }
 
     }

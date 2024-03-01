@@ -31,10 +31,9 @@ class HomeViewModel @Inject constructor(
         return when (this) {
             HomeAction.Load -> loadCryptoList()
             //HomeAction.ViewAllClicked -> TODO()
-            /* is HomeAction.BookItemClicked -> emitEvent(
-                 event = HomeEvent.NavigateToBookDetail(bookId = bookId)
-             )*/
-            is HomeAction.BookItemClicked -> TODO()
+             is HomeAction.OnCryptoClick -> emitEvent(
+                 event = HomeEvent.NavigateToDetail(cryptoId = cryptoId)
+             )
             HomeAction.ViewAllClicked -> TODO()
         }
     }
@@ -43,7 +42,7 @@ class HomeViewModel @Inject constructor(
         return flow<HomeResult> {
             repository.getTopTenCryptoMarketCap(null, null, null, null, null)
                 .flowOn(defaultDispatcher)
-                .collect() { result ->
+                .collect { result ->
                     when (result) {
                         is ApiResult.Loading -> {emit(HomeResult.Loading)}
                         is ApiResult.Error -> {emit(HomeResult.Failure)}

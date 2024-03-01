@@ -1,4 +1,4 @@
-package com.example.showtimecompose.navigation
+package com.lucreziacarena.cryptoinsight.navigation
 
 enum class Screen {
     HOME,

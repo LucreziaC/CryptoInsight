@@ -96,6 +96,10 @@ dependencies {
     kapt( "com.google.dagger:hilt-compiler:${rootProject.extra["hiltVersion"]}")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    //chart
+    implementation("com.patrykandpatrick.vico:compose-m3:1.14.0")
+
+
     kapt( "androidx.hilt:hilt-compiler:1.2.0")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
 }
