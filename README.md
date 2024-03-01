@@ -54,6 +54,3 @@ Siamo felici di accogliere contributi da parte della community! Se desideri cont
 
 Questo progetto è rilasciato sotto la licenza [MIT License](LICENSE).
 
----
-
-Sentiti libero di personalizzare ulteriormente il README aggiungendo informazioni specifiche sulle dipendenze, sull'utilizzo di librerie esterne o su qualsiasi altra funzionalità rilevante dell'applicazione CryptoInsight.
