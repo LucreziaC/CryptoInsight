@@ -27,7 +27,7 @@ CryptoInsight è un'applicazione scritta in Kotlin che consente agli utenti di v
 1. Clona il repository:
 
 ```
-git clone https://github.com/tuonome/cryptoInsight.git
+git clone https://github.com/LucreziaC/cryptoInsight.git
 ```
 
 2. Apri il progetto in Android Studio.
