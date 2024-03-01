@@ -25,15 +25,21 @@ fun AppNavHost(
             Home(navController=navController)
         }
         composable(
-            route = "${NavigationItem.Detail.route}?id={showId}",
+            route = "${NavigationItem.Detail.route}?id={cryptoId}&name={name}",
             arguments = listOf(
-                navArgument("showId") {
+                navArgument("cryptoId") {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument("name") {
                     type = NavType.StringType
                     nullable = false
                 },
             )
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("showId")?.let { DetailScreen(cryptoId = it, navController = navController) }
+            val id= backStackEntry.arguments?.getString("cryptoId")
+            val name= backStackEntry.arguments?.getString("name")
+            DetailScreen(cryptoId = id!!, name=name?:"", navController = navController)
         }
 
     }

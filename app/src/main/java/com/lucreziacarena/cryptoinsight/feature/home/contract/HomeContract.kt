@@ -1,30 +1,30 @@
 package com.lucreziacarena.cryptoinsight.feature.home.contract
 
 import com.lucreziacarena.cryptoinsight.feature.home.data.model.ui.CryptoItemUI
+import com.lucreziacarena.cryptoinsight.network.results.CryptoError
 import com.lucreziacarena.cryptoinsight.utils.*
 import javax.inject.Inject
 
 sealed class HomeAction : MviAction {
     object Load : HomeAction()
-    object ViewAllClicked : HomeAction()
-    data class OnCryptoClick(val cryptoId: String) : HomeAction()
+    data class OnCryptoClick(val cryptoId: String, val name: String) : HomeAction()
 }
 
 sealed class HomeResult : MviResult {
-    object Loading: HomeResult()
+    data object Loading: HomeResult()
     data class Success(val content: List<CryptoItemUI>) : HomeResult()
-    object Failure : HomeResult()
+    data class Failure(val error:CryptoError) : HomeResult()
 }
 
 sealed class HomeEvent : MviEvent, HomeResult() {
-    data class NavigateToDetail(val cryptoId: String) : HomeEvent()
+    data class NavigateToDetail(val cryptoId: String, val name:String) : HomeEvent()
 }
 
 sealed class HomeState : MviViewState {
     data object DefaultState : HomeState()
     data object LoadingState: HomeState()
     data class Content(val content: List<CryptoItemUI>) : HomeState()
-    data object ErrorState : HomeState()
+    data class ErrorState(val error: CryptoError) : HomeState()
 }
 
 class HomeReducer @Inject constructor() : MviStateReducer<HomeState, HomeResult> {
@@ -48,7 +48,7 @@ class HomeReducer @Inject constructor() : MviStateReducer<HomeState, HomeResult>
         return when(result) {
             HomeResult.Loading -> HomeState.LoadingState
             is HomeResult.Success -> HomeState.Content(content = result.content)
-            HomeResult.Failure -> HomeState.ErrorState
+            is HomeResult.Failure -> HomeState.ErrorState(result.error)
             else -> throw IllegalStateException("unsupported")
         }
     }

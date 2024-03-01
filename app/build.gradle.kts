@@ -74,10 +74,12 @@ dependencies {
     implementation( "androidx.compose.ui:ui-tooling:${rootProject.extra["composeVersion"]}")
     implementation( "androidx.compose.ui:ui-tooling-preview:${rootProject.extra["composeVersion"]}")
     implementation( "androidx.compose.ui:ui-viewbinding:${rootProject.extra["composeVersion"]}")
-    implementation( "androidx.compose.material:material:${rootProject.extra["composeVersion"]}")
+    implementation( "androidx.compose.material3:material3:1.2.0")
     implementation( "androidx.compose.material:material-ripple:${rootProject.extra["composeVersion"]}")
     implementation( "androidx.activity:activity-compose:${rootProject.extra["composeVersion"]}")
     implementation( "androidx.compose.runtime:runtime-livedata:${rootProject.extra["composeVersion"]}")
+    implementation("androidx.compose.material:material-icons-extended:${rootProject.extra["composeVersion"]}")
+
 
     // network
     implementation( "com.squareup.retrofit2:retrofit:${rootProject.extra["retrofitVersion"]}")
@@ -98,6 +100,8 @@ dependencies {
 
     //chart
     implementation("com.patrykandpatrick.vico:compose-m3:1.14.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
 
     kapt( "androidx.hilt:hilt-compiler:1.2.0")

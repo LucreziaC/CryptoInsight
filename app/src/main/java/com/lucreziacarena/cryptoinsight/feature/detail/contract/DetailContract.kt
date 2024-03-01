@@ -1,19 +1,20 @@
 package com.lucreziacarena.cryptoinsight.feature.detail.contract
 
 import com.lucreziacarena.cryptoinsight.feature.detail.model.ui.CryptoFullDetailsUI
+import com.lucreziacarena.cryptoinsight.feature.home.contract.HomeResult
+import com.lucreziacarena.cryptoinsight.feature.home.contract.HomeState
+import com.lucreziacarena.cryptoinsight.network.results.CryptoError
 import com.lucreziacarena.cryptoinsight.utils.*
 import javax.inject.Inject
 
 sealed class DetailAction : MviAction {
     data class LoadData(val cryptoId: String) : DetailAction()
-    data object ViewAllClicked : DetailAction()
-    data class OnCryptoClick(val cryptoId: String) : DetailAction()
 }
 
 sealed class DetailResult : MviResult {
     data object Loading: DetailResult()
     data class Success(val content: CryptoFullDetailsUI) : DetailResult()
-    data object Failure : DetailResult()
+    data class Failure(val error: CryptoError) : DetailResult()
 }
 
 sealed class DetailEvent
@@ -25,7 +26,7 @@ sealed class DetailState : MviViewState {
     data object DefaultState : DetailState()
     data object LoadingState: DetailState()
     data class Content(val content: CryptoFullDetailsUI) : DetailState()
-    data object ErrorState : DetailState()
+    data class ErrorState(val error: CryptoError) : DetailState()
 }
 
 class DetailReducer @Inject constructor() : MviStateReducer<DetailState, DetailResult> {
@@ -49,7 +50,7 @@ class DetailReducer @Inject constructor() : MviStateReducer<DetailState, DetailR
         return when(result) {
             DetailResult.Loading -> DetailState.LoadingState
             is DetailResult.Success -> DetailState.Content(content = result.content)
-            DetailResult.Failure -> DetailState.ErrorState
+            is DetailResult.Failure -> DetailState.ErrorState(result.error)
             else -> throw IllegalStateException("unsupported")
         }
     }

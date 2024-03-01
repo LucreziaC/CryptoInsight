@@ -2,8 +2,10 @@ package com.lucreziacarena.cryptoinsight.feature.detail.composable
 
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 
@@ -23,7 +25,9 @@ fun HtmlTextView(htmlText: String, onClickLink: (String) -> Unit) {
                         onClickLink(annotation.item)
                     }
                 }
-        }
+        },
+        style = TextStyle(color= Color.White)
+
     )
 }
 

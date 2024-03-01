@@ -4,6 +4,7 @@ import ApiResult
 import com.lucreziacarena.cryptoinsight.feature.home.contract.*
 import com.lucreziacarena.cryptoinsight.feature.home.data.model.ui.toUiModel
 import com.lucreziacarena.cryptoinsight.network.CryptoRepoInterface
+import com.lucreziacarena.cryptoinsight.network.results.CryptoError
 import com.lucreziacarena.cryptoinsight.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -30,11 +31,9 @@ class HomeViewModel @Inject constructor(
     override fun HomeAction.process(): Flow<HomeResult> {
         return when (this) {
             HomeAction.Load -> loadCryptoList()
-            //HomeAction.ViewAllClicked -> TODO()
              is HomeAction.OnCryptoClick -> emitEvent(
-                 event = HomeEvent.NavigateToDetail(cryptoId = cryptoId)
+                 event = HomeEvent.NavigateToDetail(cryptoId = cryptoId, name)
              )
-            HomeAction.ViewAllClicked -> TODO()
         }
     }
 
@@ -45,11 +44,11 @@ class HomeViewModel @Inject constructor(
                 .collect { result ->
                     when (result) {
                         is ApiResult.Loading -> {emit(HomeResult.Loading)}
-                        is ApiResult.Error -> {emit(HomeResult.Failure)}
+                        is ApiResult.Error -> {emit(HomeResult.Failure(result.error ?: CryptoError.GenericError("Generic error")))}
                         else -> {
                             if (result.data!=null) emit(HomeResult.Success(result.data.map{it.toUiModel()}))//is content state
                             else{
-                                emit(HomeResult.Failure)
+                                emit(HomeResult.Failure(result.error ?: CryptoError.GenericError("Generic error")))
                             }
 
                         }

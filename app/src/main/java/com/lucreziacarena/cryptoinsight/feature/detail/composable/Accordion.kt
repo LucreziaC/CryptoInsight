@@ -8,13 +8,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,10 +53,9 @@ fun Accordion(modifier: Modifier = Modifier, model: AccordionModel) {
         }
         AnimatedVisibility(visible = expanded) {
             Surface(
-                color = White,
                 shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color.Blue),
-                elevation = 1.dp,
+                border = BorderStroke(1.dp,  MaterialTheme.colorScheme.primary),
+                shadowElevation = 1.dp,
                 modifier = Modifier.padding(top = 8.dp)
             ) {
                     model.content()
@@ -75,10 +74,9 @@ private fun AccordionHeader(
     val degrees = if (isExpanded) 180f else 0f
 
     Surface(
-        color = White,
         shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp,  Color.LightGray),
-        elevation = 8.dp,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+        shadowElevation = 8.dp,
     ) {
         Row(
             modifier = Modifier
@@ -91,14 +89,13 @@ private fun AccordionHeader(
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp
             ), color = Color.LightGray)
-            Surface(shape = CircleShape, color =  Color.Blue.copy(alpha = 0.6f)) {
                 Icon(
-                    Icons.Outlined.ArrowDropDown,
+                    Icons.Filled.KeyboardArrowDown,
                     contentDescription = "arrow-down",
                     modifier = Modifier.rotate(degrees),
                     tint = White
                 )
-            }
+
         }
     }
 }

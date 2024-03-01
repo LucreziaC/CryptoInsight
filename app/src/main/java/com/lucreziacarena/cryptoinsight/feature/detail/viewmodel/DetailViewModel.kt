@@ -4,7 +4,9 @@ import com.lucreziacarena.cryptoinsight.feature.detail.contract.*
 import com.lucreziacarena.cryptoinsight.feature.detail.model.ui.history.CryptoHistoryUI
 import com.lucreziacarena.cryptoinsight.feature.detail.model.ui.history.toUiModel
 import com.lucreziacarena.cryptoinsight.feature.detail.model.ui.toUiModel
+import com.lucreziacarena.cryptoinsight.feature.home.contract.HomeResult
 import com.lucreziacarena.cryptoinsight.network.CryptoRepoInterface
+import com.lucreziacarena.cryptoinsight.network.results.CryptoError
 import com.lucreziacarena.cryptoinsight.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,21 +24,14 @@ class DetailViewModel @Inject constructor(
         initialState = DetailState.DefaultState,
         reducer = DetailReducer()
     ) {
-    init {
-        //action(DetailAction.LoadData)
-    }
 
     override fun DetailAction.process(): Flow<DetailResult> {
         return when (this) {
             is DetailAction.LoadData -> {
                 getCryptoDetails(this.cryptoId)
-            }//loadCryptoList()
-            //HomeAction.ViewAllClicked -> TODO()
-            is DetailAction.OnCryptoClick -> emitEvent(
-                event = DetailEvent.NavigateToDetail(cryptoId = cryptoId)
-            )
+            }
 
-            DetailAction.ViewAllClicked -> TODO()
+
         }
     }
 
@@ -50,9 +45,8 @@ class DetailViewModel @Inject constructor(
                             emit(DetailResult.Loading)
                         }
 
-                        is ApiResult.Error -> {
-                            emit(DetailResult.Failure)
-                        }
+                            is ApiResult.Error -> {emit(DetailResult.Failure(result.error ?: CryptoError.GenericError("Generic error")))}
+
 
                         else -> {
                             if (result.data != null) {
@@ -60,7 +54,7 @@ class DetailViewModel @Inject constructor(
                                 emit(DetailResult.Success(result.data.toUiModel()))
                             }//is content state
                             else {
-                                emit(DetailResult.Failure)
+                                emit(DetailResult.Failure(result.error ?: CryptoError.GenericError("Generic error")))
                             }
 
                         }
